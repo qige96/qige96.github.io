@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Ricky&#39;s Notes">
+    <meta name="keyword"  content="Semantic Technologies">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        ML1 - 祺哥的博客 | Ricky&#39;s Blog | Ricky&#39;s Notes
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> about code, more than code </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Ricky Zhu</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> about code, more than code </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        ML1
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-03-12 17:03:01</span></span>
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p><strong>Q：机器学习中最简单的学习算法是什么？</strong></p>
+<p>最简单的机器学习算法莫过于<strong>线性回归</strong>算法了。线性回归算法的基本形式如下：<br>$$<br>f(x)=w_1 x_1+w_2 x_2+···+w_n x_n + b<br>$$</p>
+<p>如果说把 $b$ 换成 $w_0$ ，我们能得到一个更简洁的公式</p>
+<p>$$<br>f(x)=w_0 +w_2 x_2+···+w_n x_n<br>$$</p>
+<p>其中x是自变量，w是参数。我们训练的目的就是调整w，使得我们输入一系列x值后得到的f(x)的（近似）真实值。一个常见的例子是房价预测例子。通过住房面积、房间个数两个特征来预测房价，则f(x)就是代表房价，x0=1,x1=住房面积，x2=房间个数。</p>
+<p><strong>Q：线性回归模型的参数w和b怎样确定？</strong></p>
+<p>一个预测模型的效果越好，意味着其预测误差越小。那我们的任务就是找出使得预测值f(x)与真实值y的差最小的参数w。那么我们可以建立一个函数：<br>$$<br>J(w) = \sum_i [f(x_i|w,b)-y_i ]^2<br>$$</p>
+<p>这个其实是在取定参数w和b的情况下，把每一次的预测值与真实值的差的平方加起来，得到了总的均方误差。令这个函数取最小值，那么就得到了能让f(x)与y的差最小，亦即我们的预测值与真实值的总误差最小的参数w和b，我们的回归模型效果也就最好了。</p>
+<p>现在问题转化为最小化上面的损失函数 $J(w, b)$。那么这个函数的最小化又要怎么做呢？</p>
+<p>高中的数学告诉我们，求一个函数的最小值，可以先求导，令导数为0，就找到了一堆极值点。然后把极值点代入原函数，算出函数值最小的点就是对应的最小值点了。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3139341-a6924cd4f3432c56.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="求导找最值"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3139341-d6ab903a178ecac2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="w的最优值"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3139341-c518ffa3921d6624.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="b的最值"></p>
+<p>因为损失函数 $J(w, b)$是一个凸函数，所以求出来的解直接就是最优解了。如此我们就获得了一个可以使用的线性回归模型。</p>
+<p><strong>Q：线性回归模型是用来做预测的，但做分类任务时应该用那一个模型？</strong></p>
+<p>上面提到的线性模型是最基本的线性模型，把这个基本线性模型加以改造，就可以得到用于分类任务的回归模型。</p>
+<p>假设我们输入一组住房面积和房间个数的数据，预测到了一组住房的房价，比如A房80万，B房135万，C房150万等。如果我们认为画一条线，认为140万以下为低档房，140万以上为高档房，那我们就可以根据住房面积和房间个数来给住房分类了。也就是说在预测的基础上加上一个判断条件，就构成了分类算法。</p>
+<p>对数几率回归模型，或者称逻辑回归（Logit Regression）就是这样一种基于回归的分类算法。<br>$$<br>h_w(x) = g(w^Tx) = \frac{1}{1+e^{-(w_0+w_1x_1…+w_nx_n)}}<br>$$</p>
+<blockquote>
+<p>一般来说中文对Logistic Regression的翻译多是“逻辑斯蒂回归”，也就是音译，不过周志华老师这里的“对数几率回归”则是意译（又有对数，又有概率解释，还是回归方法）。然而我自己也没找到Logistic Regression这个词的内涵，维基百科也是：Verhulst did not explain the choice of the term “logistic”, but it is presumably in contrast to the <em>logarithmic</em> curve, and by analogy with arithmetic and geometric.</p>
+</blockquote>
+<p>对数几率回归函数输出的的值是0到1范围的数。对于一个二分类任务来说，假如只分正例和反例（好瓜和坏瓜），那么我们可以认为函数输出的值越大，则这个样本是正例的几率越大，值越小，样本是反例的可能越大。这就是“对数几率回归”名字的又来。我们可以定一个临界值，一般是0.5，当输出值大于0.5时认为该样本是正例，否则为反例。</p>
+<p><strong>Q：对数几率回归的参数w和b又是怎样确定的？</strong></p>
+<p>我们知道，对数几率回归函数的输出值是一个概率。那么一个对率回归模型越好，意味着当输入模型的样本为正例时，模型的输出值越大（越接近1），当输入模型的样本为反例时，模型的输出值越小（越接近0）。</p>
+<p>因此我们可以构建这样一个函数，具体推到参考<a href="https://zhuanlan.zhihu.com/p/33543849" target="_blank" rel="noopener">这篇文章</a><br>$$<br>l(w)=\sum_{i=1}^{m}[y_iln(h_w(x))+(1-y_i)ln(1-h_w(x))]<br>$$<br>上式中$h_w(x)$是对率模型的输出值，亦即x为正例的概率值，yi是样本的真实标记，当样本为正例时y取1，为反例时y取0。这整一个函数的含义就是把每个样本属于其真实标记的概率加起来。若我们使 l(w,b) 最大，那就可以找到一组θ使得每个样本属于其真实标记的概率最大，亦即使得正例的函数值尽可能接近1，反例的函数值尽可能接近0。现在问题又转化成了最优化问题，只是这一次得函数没有上面线性回归函数那么好，很难用求导的方式确定最优解。</p>
+<p>其实最优化问题是一类经典的工程数学问题，现在已经有了许多种成熟的更泛用解决方案，比如随机游走，比如遗传算法，但在机器学习领域最常用的还是<strong>梯度下降</strong>方法。可能是因为梯度下降比较容易理解，效果也比较确定吧？</p>
+<p>“梯度下降”中的梯度又是一个什么东西？梯度是一个向量，其方向表示函数变化最快的方向，其大小（模）表示函数在此方向上的变化率。计算函数在某一点上的梯度，就是要算出函数在该点上的所有维度上的偏导数。简单理解就是，梯度是一元函数下的导数在多元函数下的推广（虽然并不准确）。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/3139341-790e9c00a39b1fc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="weikipedia image"></p>
+<p>梯度下降法是一个迭代进行的方法，每一轮都朝着梯度方向走动一小步，逐渐逼近最优值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// psudocode for gradient descent</span><br><span class="line">procedure grad_desc(X, y, w, learning_rate, precision)</span><br><span class="line">    prev_w = w</span><br><span class="line">    do</span><br><span class="line">    	w = w + learning_rate * gradient(w, X, y)</span><br><span class="line">    while f(prev_w) - f(w) &lt; precision</span><br><span class="line">    return w</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>如此我们就得到了一个优秀的对数几率回归模型。</p>
+<p><strong>Q：对数几率回归模型是处理二分类任务的，那处理多分类任务时怎么办？</strong></p>
+<p>多分类任务可以凭借二分类任务为基础得到解决。解决思路一般有一对一，一对多，和多对多三种。</p>
+<p><strong>一对一策略</strong>：举个例子，现在有A、B、C、D四个种类，要确定某个样本属于四类中的哪一类。那么我们可以事先训练好六个二分类的分类器——A/B、A/C、A/D、B/C、B/D、C/D。然后把要确定类别的样本分别放入这六个分类器。假设分类结果分别是A、A、A、B、D、C。可以知道六个分类器中有三个认为这个样本术语A，认为是B、C、D的各有一个。所以我们可以认为这个样本就是术语A类的。</p>
+<p><strong>一对多策略</strong>：举个例子，现在有A、B、C、D四个种类，要确定某个样本属于四类中的哪一类。那么我们可以事先训练好四个二分类的分类器——A/BCD、B/ACD、C/ABD、D/ABC,分类器输出的是一个函数值。然后把要确定类别的样本分别放入这四个分类器。假设四个分类器的结果分别是“属于A的概率是0.9”，“属于B的概率是0.8”、“属于C的概率是0.7”、“属于B的概率是0.6”。那我们可以认为这个样本是属于A。</p>
+<p><strong>多对多策略</strong>：每次将若干个类作为正类，若干个其他类作为反类。其中需要这种策略需要特殊的设计，不能随意取。常用的技术：纠错输出码。工作步骤分为：</p>
+<ul>
+<li>编码：对N个类别做M次划分，每次划分将一部分类别作为正类，一部分划分为反类，从而形成一个二分类训练集；这样一共产生M个训练集，可以训练出M个分类器。</li>
+<li>解码：M个分类器分别对测试样本进行预测，这些预测标记组成一个编码，将这个预测编码与每个类别各自的编码进行比较，返回其中距离最小的类别最为最终预测结果。</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/3139341-caf3df29235c1892.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>以原书的例子做一个详细的演示：<br>假如现在有一个训练数据集，可以分四个类——C1, C2, C3, C4<br>再具体一点可以想像为——西瓜可以分为一等瓜、二等瓜、三等瓜、四等瓜，要训练一个分类系统，使之能判断一个西瓜的等级。</p>
+<p>我们对训练数据集做五次划分</p>
+<ul>
+<li>第一次，标记C2为正例，其他为反例，训练出一个二分类的分类器f1</li>
+<li>第二次，标记C1、C3为正例，其他为反例，训练出一个二分类的分类器f2</li>
+<li>第三次，标记C3、C4为正例，其他为反例，训练出一个二分类的分类器f3</li>
+<li>第四次，标记C1、C2、C4为正例，其他为反例，训练出一个二分类的分类器f4</li>
+<li>第五次，标记C1、C4为正例，其他为反例，训练出一个二分类的分类器f5</li>
+</ul>
+<p>根据这五次划分的过程，每一个类都获得了一个编码（向量）：</p>
+<ul>
+<li>C1：（-1，1，-1，1，1）</li>
+<li>C2：（1，-1，-1，1，-1）</li>
+<li>C3：（-1，1，1，-1，1）</li>
+<li>C4：（-1，-1，1，1，-1）</li>
+</ul>
+<p>若现在有一个测试样本，五个分类器对应的累计结果为<br>f1：反，  f2：反，  f3：正， f4：反， f5：正<br>即该测试样本对应的编码/向量为（-1，-1，1，-1，1）<br>那么分别计算这个测试样本的编码与四个类别的编码的向量距离，可以使用欧氏距离，算的与C3类的距离是最小的。因此判定该测试样本属于C3类。</p>
+<hr>
+<blockquote>
+<p> Talk is cheap, show me the code!</p>
+</blockquote>
+<p>先来一段Linear Regression的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Simple linear regression</span></span><br><span class="line"><span class="string">Author: Richy Zhu</span></span><br><span class="line"><span class="string">Email: rickyzhu@foxmail.com</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># 不用numpy也行，只是会很麻烦，而且效率也会大大降低</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_loss_function</span><span class="params">(X, y, w)</span>:</span></span><br><span class="line">    y_hat = X.dot(w)</span><br><span class="line">    <span class="keyword">return</span> np.sum(y - y_hat)**<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_gradient_descent</span><span class="params">(X, y, w, eta)</span>:</span></span><br><span class="line">    y_hat = X.dot(w)</span><br><span class="line">    diff = y - y_hat</span><br><span class="line">    grad = eta * diff.reshape([<span class="number">-1</span>,<span class="number">1</span>]) * X * <span class="number">1.0</span>/len(X)</span><br><span class="line">    w += grad.sum(axis=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> w</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">linear_regression</span><span class="params">(X, y, eta=<span class="number">0.00001</span>, epslon=<span class="number">0.001</span>, max_iter=<span class="number">100000</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    X        - (m, n) matrix, m for number of instances, and n for number of features</span></span><br><span class="line"><span class="string">    y        - m vector</span></span><br><span class="line"><span class="string">    eta      - float number, learning rate</span></span><br><span class="line"><span class="string">    epslon   - float number, stopping criteria</span></span><br><span class="line"><span class="string">    max_iter - max iteration</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    X = np.hstack([X, np.ones([len(X),<span class="number">1</span>])]) <span class="comment"># add bias</span></span><br><span class="line">    <span class="comment"># w = np.random.random(X.shape[1]) </span></span><br><span class="line">    w = np.ones(X.shape[<span class="number">1</span>])  <span class="comment"># standard practice is to randomly initialize</span></span><br><span class="line">    prev_loss =  _loss_function(X, y, w)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(max_iter):</span><br><span class="line">        w = _gradient_descent(X, y, w, eta)</span><br><span class="line">        this_loss =  _loss_function(X, y, w)</span><br><span class="line">        <span class="keyword">if</span> prev_loss - this_loss &lt; epslon:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        prev_loss =  this_loss</span><br><span class="line">    <span class="keyword">return</span> w</span><br></pre></td></tr></table></figure>
+<p>测试一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_boston</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"></span><br><span class="line">boston = load_boston()</span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(boston.data, boston.target)</span><br><span class="line">w = linear_regression(X_train, y_train, eta=<span class="number">0.000001</span>, epslon=<span class="number">0.0001</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</span><br><span class="line">lr = LinearRegression()</span><br><span class="line">lr.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line">print(mean_squared_error(y_test,  np.hstack([X_test, np.ones([len(X_test),<span class="number">1</span>])]).dot(w)))</span><br><span class="line">print(mean_squared_error(y_test, lr.predict(X_test)))</span><br></pre></td></tr></table></figure>
+<p>下面是Logistic Regression的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Simple Logistic Regression</span></span><br><span class="line"><span class="string">Author: Richy Zhu</span></span><br><span class="line"><span class="string">Email: rickyzhu@foxmail.com</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binarize</span><span class="params">(y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> np.where(y&lt;<span class="number">0.5</span>, <span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(X)</span>:</span> </span><br><span class="line">   <span class="keyword">return</span> <span class="number">1</span> / (<span class="number">1</span> + np.exp(-X))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_loss_function</span><span class="params">(X, y, w)</span>:</span> </span><br><span class="line">   y_hat = sigmoid(X.dot(w))</span><br><span class="line">   ll = np.sum(y * np.log(y_hat) - (<span class="number">1</span>-y) * np.log(<span class="number">1</span>-y_hat))</span><br><span class="line">   <span class="keyword">return</span> ll</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_gradient_descent</span><span class="params">(X, y, w, eta)</span>:</span></span><br><span class="line">    y_hat = sigmoid(X.dot(w))</span><br><span class="line">    diff = y - y_hat</span><br><span class="line">    grad = eta * diff.reshape([<span class="number">-1</span>,<span class="number">1</span>]) * X * <span class="number">1.0</span>/len(X)</span><br><span class="line">    w += grad.sum(axis=<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> w</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logistic_regression</span><span class="params">(X, y, eta=<span class="number">0.00001</span>, epslon=<span class="number">0.001</span>, max_iter=<span class="number">100000</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    X        - (m, n) matrix, m for number of instances, and n for number of features</span></span><br><span class="line"><span class="string">    y        - m vector</span></span><br><span class="line"><span class="string">    eta      - float number, learning rate</span></span><br><span class="line"><span class="string">    epslon   - float number, stopping criteria</span></span><br><span class="line"><span class="string">    max_iter - max iteration</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    X = np.hstack([X, np.ones([len(X),<span class="number">1</span>])]) <span class="comment"># add bias</span></span><br><span class="line"><span class="comment">#     w = np.random.random(X.shape[1]) </span></span><br><span class="line">    w = np.ones(X.shape[<span class="number">1</span>])  <span class="comment"># standard practice is to randomly initialize</span></span><br><span class="line">    prev_loss =  _loss_function(X, y, w)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(max_iter):</span><br><span class="line">        w = _gradient_descent(X, y, w, eta)</span><br><span class="line">        this_loss = _loss_function(X, y, w)</span><br><span class="line">        <span class="keyword">if</span> prev_loss - this_loss &lt; epslon:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        prev_loss = this_loss</span><br><span class="line">    <span class="keyword">return</span> w</span><br></pre></td></tr></table></figure>
+<p>测试一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line"></span><br><span class="line">iris = load_iris()</span><br><span class="line">X = iris.data[iris.target!=<span class="number">2</span>]   <span class="comment"># only use samples with class 0 or 1</span></span><br><span class="line">y = iris.target[iris.target!=<span class="number">2</span>] <span class="comment"># only use samples with class 0 or 1</span></span><br><span class="line">X_train, X_test, y_train, y_test = train_test_split(X, y)</span><br><span class="line"></span><br><span class="line">w = logistic_regression(X_train, y_train, eta=<span class="number">0.0001</span>, epslon=<span class="number">0.0001</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</span><br><span class="line">lgr = LogisticRegression()</span><br><span class="line">lgr.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line">print(accuracy_score(y_test, binarize(sigmoid(np.hstack([X_test, np.ones([len(X_test),<span class="number">1</span>])]).dot(w)))))</span><br><span class="line">print(accuracy_score(y_test, lgr.predict(X_test)))</span><br><span class="line"></span><br><span class="line">print(sigmoid(np.hstack([X_test, np.ones([len(X_test),<span class="number">1</span>])]).dot(w)))</span><br><span class="line">print(y_test)</span><br></pre></td></tr></table></figure>
+<p>以scikit-learn的结果为准/(ㄒoㄒ)/~~</p>
+<hr>
+<p>本作品首发于<a href="https://www.jianshu.com/u/df4c5558ec8a" target="_blank" rel="noopener">简书</a> 和 <a href="https://www.cnblogs.com/zrq96/" target="_blank" rel="noopener">博客园</a>平台，采用<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">知识共享署名 4.0 国际许可协议</a>进行许可。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/qige96">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://www.linkedin.com/in/瑞祺-朱-a61677123">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-linkedin"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.qige96.com">Ricky&#39;s Personal website</a></span>
+        <span>/</span>
+        
+        <span><a href="https://www.jianshu.com/u/df4c5558ec8a">Ricky的中文博客</a></span>
+        <span>/</span>
+        
+        <span><a href="#">It helps SEO</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>
