@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ricky Zhu - AI Research Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #faf9f7;
+            --text: #1a1a1a;
+            --text-secondary: #666;
+            --text-tertiary: #999;
+            --border: #e8e8e8;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --card-bg: #fff;
+            --code-bg: #f4f4f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(250, 249, 247, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .nav-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 80px 24px 60px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .hero .tagline {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+
+        .hero .bio {
+            font-size: 15px;
+            color: var(--text-tertiary);
+            max-width: 480px;
+            margin: 0 auto 24px;
+            line-height: 1.6;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .hero-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .hero-links a:hover {
+            color: var(--text);
+            border-color: var(--text-tertiary);
+        }
+
+        /* Main content */
+        main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-tertiary);
+            margin-bottom: 20px;
+            padding-top: 40px;
+        }
+
+        /* Post cards */
+        .post-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .post-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .post-card:hover {
+            border-color: var(--text-tertiary);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .post-card time {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            font-weight: 500;
+        }
+
+        .post-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 8px 0 10px;
+            letter-spacing: -0.3px;
+            color: var(--text);
+        }
+
+        .post-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .post-card .tags {
+            margin-top: 14px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .post-card .tag {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            background: var(--bg);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-tertiary);
+            font-size: 13px;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .hero {
+                padding: 60px 20px 40px;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .nav-links {
+                gap: 20px;
+            }
+            main {
+                padding: 0 20px 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo">Ricky Zhu</a>
+            <div class="nav-links">
+                <a href="/">首页</a>
+                <a href="/posts/">博客</a>
+                <a href="/about.html">关于</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Ricky Zhu</h1>
+        <p class="tagline">AI Research Engineer</p>
+        <p class="bio">研究大语言模型、多模态AI与智能体系统。关注AI基础设施与工程化落地。</p>
+        <div class="hero-links">
+            <a href="https://github.com/qige96" target="_blank">GitHub</a>
+            <a href="mailto:qige96@users.noreply.github.com">Email</a>
+        </div>
+    </header>
+
+    <main>
+        <h2 class="section-title">最新文章</h2>
+        <div class="post-list">
+            <a href="/posts/ai-agent-workflow-patterns/" class="post-card">
+                <time>2025-05-24</time>
+                <h3>AI Agent 的工作流设计模式</h3>
+                <p>最近在做 AI Agent 相关的项目，梳理了几种常见的工作流设计模式。记录一下，也作为后续迭代的参考。</p>
+                <div class="tags">
+                    <span class="tag">AI</span>
+                    <span class="tag">Agent</span>
+                    <span class="tag">LLM</span>
+                </div>
+            </a>
+
+            <a href="/posts/hello-world/" class="post-card">
+                <time>2025-05-24</time>
+                <h3>Hello World</h3>
+                <p>这是这个博客的第一篇文章。记录搭建这个网站的过程，以及一些关于技术选型的思考。</p>
+                <div class="tags">
+                    <span class="tag">meta</span>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Ricky Zhu</p>
+    </footer>
+</body>
+</html>

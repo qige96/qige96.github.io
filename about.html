@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 - Ricky Zhu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #faf9f7;
+            --text: #1a1a1a;
+            --text-secondary: #555;
+            --text-tertiary: #888;
+            --border: #e5e5e5;
+            --accent: #2563eb;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(250, 249, 247, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .nav-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.8px;
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 36px 0 14px;
+            letter-spacing: -0.3px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        h2:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        p strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-tertiary);
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            main { padding: 40px 20px 60px; }
+            h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo">Ricky Zhu</a>
+            <div class="nav-links">
+                <a href="/">首页</a>
+                <a href="/posts/">博客</a>
+                <a href="/about.html">关于</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <h1>关于</h1>
+
+        <p>我是 Ricky，一名AI研究工程师。</p>
+
+        <p>目前专注于大语言模型的训练、推理优化以及AI Agent系统的构建。在此之前，我从事过计算机视觉、自然语言处理等多个AI领域的研究与开发工作。</p>
+
+        <p>我相信好的AI系统需要在算法创新与工程实践之间找到平衡。这个网站用来记录我的技术思考、项目经验与学习笔记。</p>
+
+        <h2>联系方式</h2>
+
+        <p><strong>GitHub</strong>: <a href="https://github.com/qige96" target="_blank">qige96</a></p>
+        <p><strong>Email</strong>: <a href="mailto:qige96@users.noreply.github.com">qige96@users.noreply.github.com</a></p>
+    </main>
+
+    <footer>
+        <p>© 2025 Ricky Zhu</p>
+    </footer>
+</body>
+</html>
