@@ -1,0 +1,85 @@
+<!doctype html><html lang=zh-CN><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><title>AI Agent 的工作流设计模式 | Ricky Zhu</title><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="最近在做 AI Agent 相关的项目，梳理了几种常见的工作流设计模式。记录一下，也作为后续迭代的参考。
+1. 单 Agent + 工具调用（ReAct 模式）
+最简单的模式。一个 LLM 实例，通过 function calling 使用外部工具，循环执行直到任务完成。
+# 伪代码
+agent = Agent(tools=[search, calculator, code_exec])
+
+while not done:
+    thought = agent.think(task)
+    action = agent.act(thought)
+    observation = tool.execute(action)
+    agent.observe(observation)
+适用场景: 任务边界清晰、工具明确的场景，如数据分析、信息检索。
+缺点: 复杂任务容易陷入循环，上下文膨胀快。
+
+2. 多 Agent 协作（Multi-Agent）
+多个 Agent 分工协作，通过消息传递或共享状态完成任务。
+常见的分工方式：
+
+  
+      
+          角色
+          职责
+      
+  
+  
+      
+          Planner
+          拆解任务、制定计划
+      
+      
+          Executor
+          执行具体子任务
+      
+      
+          Critic
+          检查结果、提出改进
+      
+      
+          Memory
+          管理长期记忆、知识检索
+      
+  
+
+实现方式:
+
+层级式: 一个 Orchestrator 调度多个 Worker Agent
+对等式: Agent 之间直接通信（类似微服务）
+流水线式: 固定步骤链，每个步骤一个 Agent
+
+适用场景: 复杂多步骤任务，如软件开发、研究报告生成。"><meta name=generator content="Hugo 0.161.1"><meta name=robots content="index, follow"><meta name=author content="Ricky Zhu"><link rel=stylesheet href=/ananke/css/main.fe543ec729f225f1a33caed07775c832a416476900d82ba51765d6ead9de6758.css integrity="sha256-/lQ+xynyJfGjPK7Qd3XIMqQWR2kA2CulF2XW6tneZ1g=" crossorigin=anonymous><link rel=canonical href=https://qige96.github.io/posts/ai-agent-workflow-patterns/><meta property="og:url" content="https://qige96.github.io/posts/ai-agent-workflow-patterns/"><meta property="og:site_name" content="Ricky Zhu"><meta property="og:title" content="AI Agent 的工作流设计模式"><meta property="og:description" content="最近在做 AI Agent 相关的项目，梳理了几种常见的工作流设计模式。记录一下，也作为后续迭代的参考。
+1. 单 Agent + 工具调用（ReAct 模式） 最简单的模式。一个 LLM 实例，通过 function calling 使用外部工具，循环执行直到任务完成。
+# 伪代码 agent = Agent(tools=[search, calculator, code_exec]) while not done: thought = agent.think(task) action = agent.act(thought) observation = tool.execute(action) agent.observe(observation) 适用场景: 任务边界清晰、工具明确的场景，如数据分析、信息检索。
+缺点: 复杂任务容易陷入循环，上下文膨胀快。
+2. 多 Agent 协作（Multi-Agent） 多个 Agent 分工协作，通过消息传递或共享状态完成任务。
+常见的分工方式：
+角色 职责 Planner 拆解任务、制定计划 Executor 执行具体子任务 Critic 检查结果、提出改进 Memory 管理长期记忆、知识检索 实现方式:
+层级式: 一个 Orchestrator 调度多个 Worker Agent 对等式: Agent 之间直接通信（类似微服务） 流水线式: 固定步骤链，每个步骤一个 Agent 适用场景: 复杂多步骤任务，如软件开发、研究报告生成。"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-05-24T14:30:00+08:00"><meta property="article:modified_time" content="2025-05-24T14:30:00+08:00"><meta property="article:tag" content="AI"><meta property="article:tag" content="Agent"><meta property="article:tag" content="LLM"><meta property="article:tag" content="系统设计"><meta itemprop=name content="AI Agent 的工作流设计模式"><meta itemprop=description content="最近在做 AI Agent 相关的项目，梳理了几种常见的工作流设计模式。记录一下，也作为后续迭代的参考。
+1. 单 Agent + 工具调用（ReAct 模式） 最简单的模式。一个 LLM 实例，通过 function calling 使用外部工具，循环执行直到任务完成。
+# 伪代码 agent = Agent(tools=[search, calculator, code_exec]) while not done: thought = agent.think(task) action = agent.act(thought) observation = tool.execute(action) agent.observe(observation) 适用场景: 任务边界清晰、工具明确的场景，如数据分析、信息检索。
+缺点: 复杂任务容易陷入循环，上下文膨胀快。
+2. 多 Agent 协作（Multi-Agent） 多个 Agent 分工协作，通过消息传递或共享状态完成任务。
+常见的分工方式：
+角色 职责 Planner 拆解任务、制定计划 Executor 执行具体子任务 Critic 检查结果、提出改进 Memory 管理长期记忆、知识检索 实现方式:
+层级式: 一个 Orchestrator 调度多个 Worker Agent 对等式: Agent 之间直接通信（类似微服务） 流水线式: 固定步骤链，每个步骤一个 Agent 适用场景: 复杂多步骤任务，如软件开发、研究报告生成。"><meta itemprop=datePublished content="2025-05-24T14:30:00+08:00"><meta itemprop=dateModified content="2025-05-24T14:30:00+08:00"><meta itemprop=wordCount content="167"><meta itemprop=keywords content="AI,Agent,LLM,系统设计"><meta name=twitter:card content="summary"><meta name=twitter:title content="AI Agent 的工作流设计模式"><meta name=twitter:description content="最近在做 AI Agent 相关的项目，梳理了几种常见的工作流设计模式。记录一下，也作为后续迭代的参考。
+1. 单 Agent + 工具调用（ReAct 模式） 最简单的模式。一个 LLM 实例，通过 function calling 使用外部工具，循环执行直到任务完成。
+# 伪代码 agent = Agent(tools=[search, calculator, code_exec]) while not done: thought = agent.think(task) action = agent.act(thought) observation = tool.execute(action) agent.observe(observation) 适用场景: 任务边界清晰、工具明确的场景，如数据分析、信息检索。
+缺点: 复杂任务容易陷入循环，上下文膨胀快。
+2. 多 Agent 协作（Multi-Agent） 多个 Agent 分工协作，通过消息传递或共享状态完成任务。
+常见的分工方式：
+角色 职责 Planner 拆解任务、制定计划 Executor 执行具体子任务 Critic 检查结果、提出改进 Memory 管理长期记忆、知识检索 实现方式:
+层级式: 一个 Orchestrator 调度多个 Worker Agent 对等式: Agent 之间直接通信（类似微服务） 流水线式: 固定步骤链，每个步骤一个 Agent 适用场景: 复杂多步骤任务，如软件开发、研究报告生成。"></head><body class="ma0 avenir bg-near-white production is-page is-page page-ai-agent-workflow-patterns"><header><div class=bg-black><nav class="pv3 ph3 ph4-ns" role=navigation><div class="flex-l center items-center justify-between"><a href=/ class="f3 fw2 hover-white white-90 dib no-underline">Ricky Zhu</a><div class="flex-l items-center"><ul class="pl0 mr3"><li class="list f5 f4-ns fw4 dib pr3"><a class="hover-white white-90 no-underline" href=/ title="首页 page">首页</a></li><li class="list f5 f4-ns fw4 dib pr3"><a class="hover-white white-90 no-underline" href=/posts/ title="博客 page">博客</a></li><li class="list f5 f4-ns fw4 dib pr3"><a class="hover-white white-90 no-underline" href=/about/ title="关于 page">关于</a></li></ul><div class=ananke-socials></div></div></div></nav></div></header><main class=pb7 role=main><article class="page-ai-agent-workflow-patterns flex-l mw7 center ph3 flex-wrap justify-between"><header class="mt4 w-100"><aside class="instapaper_ignoref b helvetica tracked ttu">Posts</aside><div id=sharing class="mt3 ananke-socials"></div><h1 class="f1 athelas mt3 mb1">AI Agent 的工作流设计模式</h1><p class=tracked><strong>Ricky Zhu</strong></p><time class="f6 mv4 dib tracked" datetime=2025-05-24T14:30:00+08:00>May 24, 2025</time></header><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-100-l"><p>最近在做 AI Agent 相关的项目，梳理了几种常见的工作流设计模式。记录一下，也作为后续迭代的参考。</p><h2 id=1-单-agent--工具调用react-模式>1. 单 Agent + 工具调用（ReAct 模式）</h2><p>最简单的模式。一个 LLM 实例，通过 function calling 使用外部工具，循环执行直到任务完成。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#75715e># 伪代码</span>
+</span></span><span style=display:flex><span>agent <span style=color:#f92672>=</span> Agent(tools<span style=color:#f92672>=</span>[search, calculator, code_exec])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>while</span> <span style=color:#f92672>not</span> done:
+</span></span><span style=display:flex><span>    thought <span style=color:#f92672>=</span> agent<span style=color:#f92672>.</span>think(task)
+</span></span><span style=display:flex><span>    action <span style=color:#f92672>=</span> agent<span style=color:#f92672>.</span>act(thought)
+</span></span><span style=display:flex><span>    observation <span style=color:#f92672>=</span> tool<span style=color:#f92672>.</span>execute(action)
+</span></span><span style=display:flex><span>    agent<span style=color:#f92672>.</span>observe(observation)
+</span></span></code></pre></div><p><strong>适用场景</strong>: 任务边界清晰、工具明确的场景，如数据分析、信息检索。</p><p><strong>缺点</strong>: 复杂任务容易陷入循环，上下文膨胀快。</p><hr><h2 id=2-多-agent-协作multi-agent>2. 多 Agent 协作（Multi-Agent）</h2><p>多个 Agent 分工协作，通过消息传递或共享状态完成任务。</p><p>常见的分工方式：</p><table><thead><tr><th>角色</th><th>职责</th></tr></thead><tbody><tr><td>Planner</td><td>拆解任务、制定计划</td></tr><tr><td>Executor</td><td>执行具体子任务</td></tr><tr><td>Critic</td><td>检查结果、提出改进</td></tr><tr><td>Memory</td><td>管理长期记忆、知识检索</td></tr></tbody></table><p><strong>实现方式</strong>:</p><ul><li><strong>层级式</strong>: 一个 Orchestrator 调度多个 Worker Agent</li><li><strong>对等式</strong>: Agent 之间直接通信（类似微服务）</li><li><strong>流水线式</strong>: 固定步骤链，每个步骤一个 Agent</li></ul><p><strong>适用场景</strong>: 复杂多步骤任务，如软件开发、研究报告生成。</p><hr><h2 id=3-反思与迭代reflection>3. 反思与迭代（Reflection）</h2><p>Agent 生成结果后，自我检查并迭代改进。</p><pre tabindex=0><code>生成初稿 → 自我评估 → 发现问题 → 修改优化 → 重复直到满意
+</code></pre><p>可以是自己反思，也可以专门用一个 Critic Agent 来审查。</p><p><strong>关键</strong>: 需要明确的评估标准（criteria），否则反思流于形式。</p><hr><h2 id=4-规划-执行分离plan-and-execute>4. 规划-执行分离（Plan-and-Execute）</h2><p>先制定完整计划，再按步骤执行。</p><pre tabindex=0><code>输入 → Planner 生成计划 → 逐步执行 → 汇总结果
+</code></pre><p>与 ReAct 的区别：ReAct 是边想边做，Plan-and-Execute 是先想后做。</p><p><strong>优点</strong>: 计划可审查、可修改，适合需要人类确认的场景。
+<strong>缺点</strong>: 计划可能跟不上变化，需要动态调整机制。</p><hr><h2 id=5-人在回路human-in-the-loop>5. 人在回路（Human-in-the-Loop）</h2><p>关键节点引入人工审核或决策。</p><p>常见介入点：</p><ul><li>计划制定后（确认方向）</li><li>工具调用前（确认敏感操作）</li><li>结果输出前（确认最终质量）</li></ul><p><strong>不要为了用 Agent 而用 Agent</strong>。有些决策机器做不如人做，明确边界很重要。</p><hr><h2 id=一些实践经验>一些实践经验</h2><ol><li><strong>上下文管理</strong>: 长任务必须做上下文压缩或摘要，否则后期质量断崖下降。</li><li><strong>错误恢复</strong>: Agent 会出错，设计时要考虑重试、回退、人工接管机制。</li><li><strong>可观测性</strong>: Agent 的推理过程要可追踪，否则出问题很难 debug。</li><li><strong>成本意识</strong>: 多 Agent + 多轮迭代 = Token 消耗爆炸，需要预算控制。</li></ol><hr><h2 id=参考>参考</h2><ul><li><a href=https://arxiv.org/abs/2210.03629>ReAct: Synergizing Reasoning and Acting in Language Models</a></li><li><a href=https://arxiv.org/abs/2308.08155>AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation</a></li><li><a href=https://langchain-ai.github.io/langgraph/>LangGraph: Building stateful, multi-actor applications with LLMs</a></li></ul><hr><p><em>写于 2025-05-24，观点可能随认知更新而改变。</em></p><ul class=pa0><li class="list di"><a href=/tags/ai/ class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">AI</a></li><li class="list di"><a href=/tags/agent/ class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">Agent</a></li><li class="list di"><a href=/tags/llm/ class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">LLM</a></li><li class="list di"><a href=/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/ class="link f5 grow br-pill ba ph3 pv2 mb2 dib black sans-serif no-underline">系统设计</a></li></ul></div></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href=https://qige96.github.io/>&copy; Ricky Zhu 2026</a><div><div class=ananke-socials></div></div></div></footer></body></html>
+
+
+

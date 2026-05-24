@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ricky Zhu</title><link>https://qige96.github.io/posts/</link><description>Recent content in Posts on Ricky Zhu</description><generator>Hugo</generator><language>zh-CN</language><lastBuildDate>Sat, 24 May 2025 14:30:00 +0800</lastBuildDate><atom:link href="https://qige96.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>AI Agent 的工作流设计模式</title><link>https://qige96.github.io/posts/ai-agent-workflow-patterns/</link><pubDate>Sat, 24 May 2025 14:30:00 +0800</pubDate><guid>https://qige96.github.io/posts/ai-agent-workflow-patterns/</guid><description>&lt;p&gt;最近在做 AI Agent 相关的项目，梳理了几种常见的工作流设计模式。记录一下，也作为后续迭代的参考。&lt;/p&gt;
+&lt;h2 id="1-单-agent--工具调用react-模式"&gt;1. 单 Agent + 工具调用（ReAct 模式）&lt;/h2&gt;
+&lt;p&gt;最简单的模式。一个 LLM 实例，通过 function calling 使用外部工具，循环执行直到任务完成。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 伪代码&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;agent &lt;span style="color:#f92672"&gt;=&lt;/span&gt; Agent(tools&lt;span style="color:#f92672"&gt;=&lt;/span&gt;[search, calculator, code_exec])
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#66d9ef"&gt;while&lt;/span&gt; &lt;span style="color:#f92672"&gt;not&lt;/span&gt; done:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; thought &lt;span style="color:#f92672"&gt;=&lt;/span&gt; agent&lt;span style="color:#f92672"&gt;.&lt;/span&gt;think(task)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; action &lt;span style="color:#f92672"&gt;=&lt;/span&gt; agent&lt;span style="color:#f92672"&gt;.&lt;/span&gt;act(thought)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; observation &lt;span style="color:#f92672"&gt;=&lt;/span&gt; tool&lt;span style="color:#f92672"&gt;.&lt;/span&gt;execute(action)
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; agent&lt;span style="color:#f92672"&gt;.&lt;/span&gt;observe(observation)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;适用场景&lt;/strong&gt;: 任务边界清晰、工具明确的场景，如数据分析、信息检索。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;缺点&lt;/strong&gt;: 复杂任务容易陷入循环，上下文膨胀快。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="2-多-agent-协作multi-agent"&gt;2. 多 Agent 协作（Multi-Agent）&lt;/h2&gt;
+&lt;p&gt;多个 Agent 分工协作，通过消息传递或共享状态完成任务。&lt;/p&gt;
+&lt;p&gt;常见的分工方式：&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;角色&lt;/th&gt;
+ &lt;th&gt;职责&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Planner&lt;/td&gt;
+ &lt;td&gt;拆解任务、制定计划&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Executor&lt;/td&gt;
+ &lt;td&gt;执行具体子任务&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Critic&lt;/td&gt;
+ &lt;td&gt;检查结果、提出改进&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;Memory&lt;/td&gt;
+ &lt;td&gt;管理长期记忆、知识检索&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;实现方式&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;层级式&lt;/strong&gt;: 一个 Orchestrator 调度多个 Worker Agent&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对等式&lt;/strong&gt;: Agent 之间直接通信（类似微服务）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;流水线式&lt;/strong&gt;: 固定步骤链，每个步骤一个 Agent&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;适用场景&lt;/strong&gt;: 复杂多步骤任务，如软件开发、研究报告生成。&lt;/p&gt;</description></item><item><title>Hello World</title><link>https://qige96.github.io/posts/hello-world/</link><pubDate>Sat, 24 May 2025 12:00:00 +0800</pubDate><guid>https://qige96.github.io/posts/hello-world/</guid><description>&lt;p&gt;这是这个博客的第一篇文章。&lt;/p&gt;
+&lt;h2 id="为什么搭建这个网站"&gt;为什么搭建这个网站&lt;/h2&gt;
+&lt;p&gt;一直想有一个属于自己的空间，用来记录技术学习和思考。之前尝试过各种平台，但总觉得不够自由——要么排版受限，要么担心内容被删，要么广告太多。&lt;/p&gt;
+&lt;p&gt;用 GitHub Pages + Hugo 搭建静态网站，有几个好处：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;完全免费&lt;/strong&gt; — 不需要服务器，不需要域名（当然也可以买）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内容可控&lt;/strong&gt; — 所有内容都是 Markdown 文件，存在 Git 仓库里&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;发布简单&lt;/strong&gt; — &lt;code&gt;git push&lt;/code&gt; 就自动部署&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;速度够快&lt;/strong&gt; — 静态页面，没有数据库查询&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="技术选型"&gt;技术选型&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Hugo&lt;/strong&gt;: 静态站点生成器，Go 语言写的，构建极快&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ananke 主题&lt;/strong&gt;: 简洁、响应式、维护活跃&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitHub Pages&lt;/strong&gt;: 托管，与 Git 工作流无缝集成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="后续计划"&gt;后续计划&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 添加更多项目展示&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 写一些技术文章&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 考虑绑定自定义域名&lt;/li&gt;
+&lt;li&gt;&lt;input disabled="" type="checkbox"&gt; 添加评论系统（Utterances 或 Giscus）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;先这样吧，Hello World！&lt;/p&gt;</description></item></channel></rss>
